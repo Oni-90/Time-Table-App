@@ -1,0 +1,106 @@
+<div class="content">
+  <!-- **** affichage des annees **** -->
+
+  <div class="col-sm-12 col-xl-6" *ngIf="page === 'liste'">
+    <div class="bg-secondary rounded h-100 p-4">
+      <h6 class="mb-4">Hoverable Table</h6>
+      <button (click)="pageAjout()">Ajouter une Annee</button>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">annees</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let annee of annees">
+          <tr>
+            <th scope="row">{{ annee.id }}</th>
+            <td>{{ annee.anne }}</td>
+            <td>
+              <a
+                class="btn btn-success btn-circle btn-sm"
+                (click)="pageModif(annee)"
+              >
+                <i class="fas fa-check"></i>
+              </a>
+              &nbsp;&nbsp;
+              <a class="btn btn-danger btn-circle btn-sm" (click)="pageSup()">
+                <i class="fas fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- **** Formulaire d'ajout d'une annee **** -->
+
+  <div class="col-sm-12 col-xl-6">
+    <div class="bg-secondary rounded h-100 p-4" *ngIf="page === 'ajout'">
+      <h6 class="mb-4">Floating Label</h6>
+      <div class="form-floating mb-3">
+        <input
+          type="datetime"
+          class="form-control"
+          id="floatingInput"
+          [(ngModel)]="nouvelleAnnee.anne"
+        />
+        <label for="floatingInput">Annee</label>
+      </div>
+
+      <!-- <div class="form-floating mb-3">
+        <input
+          type="datetime"
+          class="form-control"
+          id="floatingInput"
+          [(ngModel)]="nouvelleAnnee.date_fin"
+        />
+        <label for="floatingInput">Date fin</label>
+      </div> -->
+      <button (click)="add()">Ajouter</button>
+    </div>
+  </div>
+
+  <!-- **** modification d'une classe **** -->
+
+  <div class="col-sm-12 col-xl-6">
+    <div class="bg-secondary rounded h-100 p-4" *ngIf="anneeSelectionnee">
+      <h6 class="mb-4">Floating Label</h6>
+      <div class="form-floating mb-3">
+        <input
+          type="time"
+          class="form-control"
+          id="floatingInputDebut"
+          [(ngModel)]="anneeSelectionnee.anne"
+        />
+        <label for="floatingInputDebut">Annee</label>
+      </div>
+  
+      <!-- <div class="form-floating mb-3">
+        <input
+          type="time"
+          class="form-control"
+          id="floatingInputFin"
+          [(ngModel)]="anneeSelectionnee.date_fin"
+        />
+        <label for="floatingInputFin">Date fin</label>
+      </div> -->
+      <button (click)="update(anneeSelectionnee.id,anneeSelectionnee)">Modifier</button>
+    </div>
+  </div>
+  
+
+  <!-- **** suppression d'une classe **** -->
+
+  <div *ngIf="page === 'suppression'">
+    <h2>Supprimer un élément :</h2>
+    <p>Voulez-vous vraiment supprimer cet élément ?</p>
+    <div *ngFor="let annee of annees">
+      <p>{{ annee.anne}}</p>
+      <button (click)="delete(annee.id)">Confirmer</button>
+      <button (click)="annuler()">Annuler</button>
+    </div>
+  </div>
+

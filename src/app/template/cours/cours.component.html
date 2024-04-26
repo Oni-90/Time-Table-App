@@ -1,0 +1,114 @@
+<div class="content">
+    <!-- **** affichage des cours **** -->
+
+    <div class="col-sm-12 col-xl-6" *ngIf="page === 'liste'">
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Hoverable Table</h6>
+        <button (click)="pageAjout()">Ajouter un cours</button>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Matières</th>
+                    <th scope="col">Profs</th>
+                    <th scope="col">Classes</th>
+                    <th scope="col">Annees</th>
+                    <th scope="col">Actions</th>
+                    
+                </tr>
+            </thead>
+            <tbody *ngFor="let coursItem of cours">
+                <tr>
+                    <th scope="row">{{coursItem.id}}</th>
+                    <td>{{coursItem.matiere.nom}}</td>
+                    <td>{{coursItem.enseignant.nom}}</td>
+                    <td>{{coursItem.classe.intitule}}</td>
+                    <td>{{coursItem.annee.anne}}</td>
+                    <td>  <a  class="btn btn-success btn-circle btn-sm" (click)="pageModif(coursItem)">
+                        <i class="fas fa-check"></i>
+                        </a>
+                        &nbsp;&nbsp;
+                        <a class="btn btn-danger btn-circle btn-sm" (click)="pageSup()">
+                        <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+
+
+        <!-- **** Formulaire pour l'ajout d'un cours **** -->
+
+    <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded h-100 p-4" *ngIf="page === 'ajout'">
+            <h6 class="mb-4">Select</h6>
+                <form (ngSubmit)="add()">
+                    <label for="matiere">Matière:</label>
+                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" [(ngModel)]="nouveauCours.matiere.nom" name="intitule">
+                      <option *ngFor="let matiere of matieres" [value]="matiere.nom">{{ matiere.nom }}</option>
+                    </select><br>
+                    <label for="enseignant">Enseignant:</label>
+                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" [(ngModel)]="nouveauCours.enseignant.nom" name="nom" required>
+                      <option *ngFor="let enseignant of enseignants" [value]="enseignant.nom">{{ enseignant.nom }}</option>
+                    </select><br>
+                    <label for="classe">Classe:</label>
+                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" [(ngModel)]="nouveauCours.classe.intitule" name="intitule">
+                      <option *ngFor="let classe of classes" [value]="classe.intitule">{{ classe.intitule }}</option>
+                    </select><br>
+                    <label for="annee">Année:</label>
+                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" [(ngModel)]="nouveauCours.annee.anne" name="anne">
+                      <option *ngFor="let annee of annees" [value]="annee.anne">{{ annee.anne }}</option>
+                    </select><br>
+
+                    <button type="submit" >Ajouter</button>
+                    <button type="button" (click)="annuler()">Annuler</button>
+                </form>
+        </div>
+    </div>
+
+
+         <!-- ***** Formulaire pour la modification d'un cours  **** -->
+
+    <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded h-100 p-4" *ngIf="coursSelectionne">
+            <h6 class="mb-4">Select</h6>
+            <form (ngSubmit)="update()">
+                <label for="matiere">Matière:</label>
+                <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" [(ngModel)]="coursSelectionne.matiere">
+                    <option *ngFor="let matiere of matieres" [value]="matiere">{{ matiere.nom }}</option>
+                </select><br>
+                <label for="enseignant">Enseignant:</label>
+                <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" [(ngModel)]="coursSelectionne.enseignant"  required>
+                    <option *ngFor="let enseignant of enseignants" [value]="enseignant">{{ enseignant.nom }}</option>
+                </select><br>
+                <label for="classe">Classe:</label>
+                <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" [(ngModel)]="coursSelectionne.classe" required>
+                    <option *ngFor="let classe of classes" [value]="classe">{{ classe.intitule }}</option>
+                </select><br>
+                <label for="annee">Année:</label>
+                <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" [(ngModel)]="coursSelectionne.annee" required>
+                    <option *ngFor="let annee of annees" [value]="annee">{{ annee.anne }}</option>
+                </select><br>
+
+                <button type="submit">Modifier</button>
+                <button type="button" (click)="annuler()">Annuler</button>
+                </form>
+        </div>
+    </div>
+
+
+            <!-- **** suppression d'un cours **** -->
+
+<!--         
+    <div *ngIf="page === 'suppression'">
+        <h2>Supprimer un cours :</h2>
+        <p>Voulez-vous vraiment supprimer ce cours ?</p>
+        <button (click)="delete(coursSelectionne.id)">Confirmer</button>
+        <button (click)="annuler()">Annuler</button>
+    </div> -->
+    
+                

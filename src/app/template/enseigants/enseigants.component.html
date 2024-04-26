@@ -1,0 +1,142 @@
+<div class="content">
+    <!-- **** affichage des classes **** -->
+
+    <div class="col-sm-12 col-xl-6" *ngIf="page === 'liste'">
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Hoverable Table</h6>
+        <button (click)="pageAjout()">Ajouter un enseignant</button>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenoms</th>
+                    <th scope="col">tel</th>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+                    
+                </tr>
+            </thead>
+            <tbody *ngFor="let enseignant of enseignants">
+                <tr>
+                    <th scope="row">{{enseignant.id}}</th>
+                    <td>{{enseignant.nom}}</td>
+                    <td>{{enseignant.prenom}}</td>
+                    <td>{{enseignant.telephone}}</td>
+                    <td>{{enseignant.matricule}}</td>
+                    <td>{{enseignant.email}}</td>
+                    <td>  <a  class="btn btn-success btn-circle btn-sm" (click)="pageModif(enseignant)">
+                        <i class="fas fa-check"></i>
+                        </a>
+                        &nbsp;&nbsp;
+                        <a class="btn btn-danger btn-circle btn-sm" (click)="pageSup()">
+                        <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+
+    <!-- **** Formulaire d'ajout d'une classe **** -->
+
+    <div class="col-sm-12 col-xl-6">
+    <div class="bg-secondary rounded h-100 p-4" *ngIf="page === 'ajout'">
+        <h6 class="mb-4">Floating Label</h6>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput"
+                [(ngModel)]="nouvelEnseignant.nom" >
+            <label for="floatingInput">Nom</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput"
+                [(ngModel)]="nouvelEnseignant.prenom" >
+            <label for="floatingInput">Prenoms</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput"
+                [(ngModel)]="nouvelEnseignant.telephone" >
+            <label for="floatingInput">tel</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput"
+                [(ngModel)]="nouvelEnseignant.matricule" >
+            <label for="floatingInput">matricule</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput"
+                [(ngModel)]="nouvelEnseignant.email" >
+            <label for="floatingInput">email</label>
+        </div>
+        <button (click)="add()">Ajouter</button>
+    </div>
+    </div>
+
+
+    <!-- **** modification d'une classe **** -->
+
+    <div class="col-sm-12 col-xl-6">
+    <div class="bg-secondary rounded h-100 p-4" *ngIf="enseignantSelectionne">
+        <h6 class="mb-4">Floating Label</h6>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput"
+                [(ngModel)]="enseignantSelectionne.nom" >
+            <label for="floatingInput">nom</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput"
+                [(ngModel)]="enseignantSelectionne.prenom" >
+            <label for="floatingInput">prenom</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput"
+                [(ngModel)]="enseignantSelectionne.telephone" >
+            <label for="floatingInput">tel</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput"
+                [(ngModel)]="enseignantSelectionne.matricule" >
+            <label for="floatingInput">matricule</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput"
+                [(ngModel)]="enseignantSelectionne.email" >
+            <label for="floatingInput">email</label>
+        </div>
+        <button (click)="update(enseignantSelectionne.id,enseignantSelectionne)">Modifier</button>
+    </div>
+    </div>
+
+    <!-- **** suppression d'une classe **** -->
+
+    <div *ngIf="page === 'suppression'">
+        <h2>Supprimer un élément :</h2>
+        <p>Voulez-vous vraiment supprimer cet élément ?</p>
+        <div *ngFor="let enseignant of enseignants">
+            <p>{{ enseignant.nom }}</p> 
+            <button (click)="delete(enseignant.id)">Confirmer</button>
+            <button (click)="annuler()">Annuler</button>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+
